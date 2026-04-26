@@ -38,3 +38,17 @@ ax[1].set_title('relationship btw sepals')
 
 plt.tight_layout()
 plt.show()
+
+##histogram
+
+fig , axes=plt.subplots(1,4)
+
+labels=['PetalLengthCm','PetalWidthCm','SepalLengthCm','SepalWidthCm']
+colors=['red','green','steelblue','orange']
+
+for col, c , ax in zip(labels, colors, axes):
+    ax.hist(dfcleaned[col],bins=20,color=c, density=True)
+    ax.set_title(col)
+
+plt.tight_layout()
+plt.show()

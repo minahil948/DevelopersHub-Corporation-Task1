@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-
+import seaborn as ssn
 dataset=pd.read_csv("Iris.csv") 
 dfcleaned=dataset.dropna() 
 sh=dfcleaned.shape 
@@ -51,4 +51,17 @@ for col, c , ax in zip(labels, colors, axes):
     ax.set_title(col)
 
 plt.tight_layout()
+plt.show()
+
+
+#boxplot
+
+
+plt.figure(figsize=(10, 6))
+
+ssn.boxplot(data=dfcleaned[['SepalLengthCm', 'SepalWidthCm',
+                            'PetalLengthCm', 'PetalWidthCm']])
+
+plt.title("Box Plots for All Features")
+plt.xticks(rotation=20)
 plt.show()

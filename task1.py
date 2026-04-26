@@ -1,17 +1,19 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as ssn
+
 dataset=pd.read_csv("Iris.csv") 
-dfcleaned=dataset.dropna() 
+dfcleaned = dataset.copy()
 sh=dfcleaned.shape 
 print("shape is :", sh)
 print("column names :",dfcleaned.columns) 
 print(dfcleaned.head(10))
-print(dfcleaned.info())
+dfcleaned.info()
 print(dfcleaned.describe())
 
+#scatter plot
 
-fig ,ax =plt.subplots(1,2)
+fig, ax = plt.subplots(1, 2, figsize=(12, 5))
 petallength= dfcleaned['PetalLengthCm']
 petalwidth=dfcleaned['PetalWidthCm']
 ax[0].scatter(
@@ -41,8 +43,7 @@ plt.show()
 
 ##histogram
 
-fig , axes=plt.subplots(1,4)
-
+fig, axes = plt.subplots(1, 4, figsize=(16, 4))
 labels=['PetalLengthCm','PetalWidthCm','SepalLengthCm','SepalWidthCm']
 colors=['red','green','steelblue','orange']
 
@@ -53,9 +54,7 @@ for col, c , ax in zip(labels, colors, axes):
 plt.tight_layout()
 plt.show()
 
-
 #boxplot
-
 
 plt.figure(figsize=(10, 6))
 
@@ -64,4 +63,9 @@ ssn.boxplot(data=dfcleaned[['SepalLengthCm', 'SepalWidthCm',
 
 plt.title("Box Plots for All Features")
 plt.xticks(rotation=20)
+plt.show()
+
+#pairplot
+
+ssn.pairplot(dfcleaned, hue="Species")
 plt.show()

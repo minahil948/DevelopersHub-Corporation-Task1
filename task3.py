@@ -1,9 +1,30 @@
 import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
 
-data=pd.read_csv("heart_disease_uci.csv")
+df = pd.read_csv("heart.csv")
 
-print(data.head(10))
-print(data.columns)
+print("First 5 rows:")
+print(df.head())
 
-categorical_cols = ['cp', 'thal', 'slope', 'ca']
-df = pd.get_dummies(data, columns=categorical_cols, drop_first=True)
+print("\nDataset Info:")
+print(df.info())
+
+print("\nMissing values:")
+print(df.isnull().sum())
+
+df = df.dropna()
+
+print("\nStatistical Summary:")
+print(df.describe())
+
+
+plt.figure(figsize=(12,8))
+sns.heatmap(df.corr(), annot=True, cmap="coolwarm")
+plt.title("Correlation Heatmap")
+plt.show()
+
+sns.countplot(x='target', data=df)
+plt.title("Target Distribution (0 = No Disease, 1 = Disease)")
+plt.show()
